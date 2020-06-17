@@ -35,7 +35,6 @@ namespace EmployeeManagement
 
         private static T CreateItem<T>(DataRow row, IList<PropertyInfo> properties) where T : new()
         {
-
             T item = new T();
 
             // Eigenschaften auslesen.

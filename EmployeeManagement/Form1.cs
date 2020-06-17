@@ -50,8 +50,6 @@ namespace EmployeeManagement
                     grdEmployee.Rows[index].Cells["Nachname"].Value = employee.LastName;
                 }
 
-                
-
             }
             catch (MySqlException ex)
             {
@@ -135,6 +133,7 @@ namespace EmployeeManagement
             grdEmployee.SelectionChanged += new EventHandler(GridEmployeeRow_Click);
             
         }
+
         private void SetupTasksGrid()
         {
             // Grid anzeigen
