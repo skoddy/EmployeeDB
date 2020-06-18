@@ -26,7 +26,7 @@ namespace EmployeeManagement
             SetupAssignedTasksGrid();
             // Da das Grid Standartmässig einen Focus hat,
             // werden hier die dazugehörigen Aufgaben geladen.
-            if (grdEmployee.SelectedRows[0].Cells[0].Value != null)
+            if (grdEmployee.Rows.Count > 0)
             {
                 int employeeId = (int)grdEmployee.SelectedRows[0].Tag;
                 PopulateAssignedTasksGrid(employeeId);
@@ -62,7 +62,7 @@ namespace EmployeeManagement
                 MessageBox.Show(ex.Message);
             }
 
-          
+
         }
 
         private void PopulateAssignedTasksGrid(int id)
@@ -101,7 +101,7 @@ namespace EmployeeManagement
 
             if (tasks.Count != 0)
             {
-                foreach(Task task in tasks)
+                foreach (Task task in tasks)
                 {
                     cbTasks.Items.Add(task.Name);
                 }
@@ -181,7 +181,7 @@ namespace EmployeeManagement
 
         private void GridEmployeeRow_Click(object sender, EventArgs e)
         {
-            if(grdEmployee.SelectedRows[0].Cells[0].Value != null)
+            if (grdEmployee.SelectedRows[0].Cells[0].Value != null)
             {
                 int id = (int)grdEmployee.SelectedRows[0].Tag;
                 Employee employee = employees.Find(data => data.Id == id);
@@ -202,7 +202,7 @@ namespace EmployeeManagement
                 tbNewEmployeeFirstName.Clear();
                 tbNewEmployeeLastName.Clear();
             }
-            catch(MySqlException ex)
+            catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -246,7 +246,7 @@ namespace EmployeeManagement
 
         private void btnAssignTask_Click(object sender, EventArgs e)
         {
-            if(cbTasks.SelectedIndex != -1 && grdEmployee.SelectedRows[0].Cells[0].Value != null)
+            if (cbTasks.SelectedIndex != -1 && grdEmployee.SelectedRows[0].Cells[0].Value != null)
             {
                 int taskId = cbTasks.SelectedIndex + 1;
                 int employeeId = (int)grdEmployee.SelectedRows[0].Tag;
@@ -264,18 +264,22 @@ namespace EmployeeManagement
 
         private void btnDeleteAssignedTask_Click(object sender, EventArgs e)
         {
-            if(grdAssignedTasks.SelectedRows[0].Cells[0].Value != null)
+            if (grdAssignedTasks.Rows.Count > 0)
             {
-                int assignedTaskId = (int)grdAssignedTasks.SelectedRows[0].Tag;
-                int employeeId = (int)grdEmployee.SelectedRows[0].Tag;
-                try
+                if (grdAssignedTasks.SelectedRows[0].Cells[0].Value != null)
                 {
-                    task.DeleteAssignedTask(assignedTaskId);
-                    PopulateAssignedTasksGrid(employeeId);
-                }
-                catch(MySqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
+                    int assignedTaskId = (int)grdAssignedTasks.SelectedRows[0].Tag;
+                    int employeeId = (int)grdEmployee.SelectedRows[0].Tag;
+                    try
+                    {
+                        task.DeleteAssignedTask(assignedTaskId);
+                        PopulateAssignedTasksGrid(employeeId);
+                    }
+                    catch (MySqlException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
                 }
             }
         }
