@@ -76,6 +76,7 @@ namespace EmployeeManagement
                 MySqlCommand cmd = connection.CreateCommand();
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.CommandText = sql;
+                cmd.Prepare();
                 cmd.ExecuteNonQuery();
             }
         }

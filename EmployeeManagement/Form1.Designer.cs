@@ -30,32 +30,32 @@
         {
             this.grdEmployee = new System.Windows.Forms.DataGridView();
             this.grpbNewEmployee = new System.Windows.Forms.GroupBox();
-            this.btnAddNewEmployee = new System.Windows.Forms.Button();
-            this.tbNewEmployeeFirstName = new System.Windows.Forms.TextBox();
-            this.tbNewEmployeeLastName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbNewEmployeeLastName = new System.Windows.Forms.TextBox();
+            this.tbNewEmployeeFirstName = new System.Windows.Forms.TextBox();
+            this.btnAddNewEmployee = new System.Windows.Forms.Button();
             this.grpbEditEmployee = new System.Windows.Forms.GroupBox();
-            this.btnEditEmployee = new System.Windows.Forms.Button();
-            this.tbEditEmployeeFirstName = new System.Windows.Forms.TextBox();
-            this.tbEditEmployeeLastName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbEditEmployeeLastName = new System.Windows.Forms.TextBox();
+            this.tbEditEmployeeFirstName = new System.Windows.Forms.TextBox();
+            this.btnEditEmployee = new System.Windows.Forms.Button();
             this.btnDeleteEmployee = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbTasks = new System.Windows.Forms.ComboBox();
             this.btnAssignTask = new System.Windows.Forms.Button();
-            this.grdTasks = new System.Windows.Forms.DataGridView();
+            this.cbTasks = new System.Windows.Forms.ComboBox();
+            this.grdAssignedTasks = new System.Windows.Forms.DataGridView();
             this.btnDeleteAssignedTask = new System.Windows.Forms.Button();
             this.grpbEmployees = new System.Windows.Forms.GroupBox();
-            this.grpbTasks = new System.Windows.Forms.GroupBox();
+            this.grpbAssignedTasks = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdEmployee)).BeginInit();
             this.grpbNewEmployee.SuspendLayout();
             this.grpbEditEmployee.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdTasks)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdAssignedTasks)).BeginInit();
             this.grpbEmployees.SuspendLayout();
-            this.grpbTasks.SuspendLayout();
+            this.grpbAssignedTasks.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdEmployee
@@ -80,29 +80,14 @@
             this.grpbNewEmployee.TabStop = false;
             this.grpbNewEmployee.Text = "Neuer Mitarbeiter";
             // 
-            // btnAddNewEmployee
+            // label2
             // 
-            this.btnAddNewEmployee.Location = new System.Drawing.Point(6, 131);
-            this.btnAddNewEmployee.Name = "btnAddNewEmployee";
-            this.btnAddNewEmployee.Size = new System.Drawing.Size(188, 23);
-            this.btnAddNewEmployee.TabIndex = 0;
-            this.btnAddNewEmployee.Text = "Speichern";
-            this.btnAddNewEmployee.UseVisualStyleBackColor = true;
-            this.btnAddNewEmployee.Click += new System.EventHandler(this.btnAddNewEmployee_Click);
-            // 
-            // tbNewEmployeeFirstName
-            // 
-            this.tbNewEmployeeFirstName.Location = new System.Drawing.Point(79, 30);
-            this.tbNewEmployeeFirstName.Name = "tbNewEmployeeFirstName";
-            this.tbNewEmployeeFirstName.Size = new System.Drawing.Size(115, 20);
-            this.tbNewEmployeeFirstName.TabIndex = 1;
-            // 
-            // tbNewEmployeeLastName
-            // 
-            this.tbNewEmployeeLastName.Location = new System.Drawing.Point(79, 56);
-            this.tbNewEmployeeLastName.Name = "tbNewEmployeeLastName";
-            this.tbNewEmployeeLastName.Size = new System.Drawing.Size(115, 20);
-            this.tbNewEmployeeLastName.TabIndex = 2;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 59);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Nachname";
             // 
             // label1
             // 
@@ -113,14 +98,29 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Vorname";
             // 
-            // label2
+            // tbNewEmployeeLastName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 59);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Nachname";
+            this.tbNewEmployeeLastName.Location = new System.Drawing.Point(79, 56);
+            this.tbNewEmployeeLastName.Name = "tbNewEmployeeLastName";
+            this.tbNewEmployeeLastName.Size = new System.Drawing.Size(115, 20);
+            this.tbNewEmployeeLastName.TabIndex = 2;
+            // 
+            // tbNewEmployeeFirstName
+            // 
+            this.tbNewEmployeeFirstName.Location = new System.Drawing.Point(79, 30);
+            this.tbNewEmployeeFirstName.Name = "tbNewEmployeeFirstName";
+            this.tbNewEmployeeFirstName.Size = new System.Drawing.Size(115, 20);
+            this.tbNewEmployeeFirstName.TabIndex = 1;
+            // 
+            // btnAddNewEmployee
+            // 
+            this.btnAddNewEmployee.Location = new System.Drawing.Point(6, 131);
+            this.btnAddNewEmployee.Name = "btnAddNewEmployee";
+            this.btnAddNewEmployee.Size = new System.Drawing.Size(188, 23);
+            this.btnAddNewEmployee.TabIndex = 0;
+            this.btnAddNewEmployee.Text = "Speichern";
+            this.btnAddNewEmployee.UseVisualStyleBackColor = true;
+            this.btnAddNewEmployee.Click += new System.EventHandler(this.btnAddNewEmployee_Click);
             // 
             // grpbEditEmployee
             // 
@@ -136,29 +136,14 @@
             this.grpbEditEmployee.TabStop = false;
             this.grpbEditEmployee.Text = "Mitarbeiter Bearbeiten";
             // 
-            // btnEditEmployee
+            // label4
             // 
-            this.btnEditEmployee.Location = new System.Drawing.Point(9, 131);
-            this.btnEditEmployee.Name = "btnEditEmployee";
-            this.btnEditEmployee.Size = new System.Drawing.Size(181, 23);
-            this.btnEditEmployee.TabIndex = 2;
-            this.btnEditEmployee.Text = "Änderungen Speichern";
-            this.btnEditEmployee.UseVisualStyleBackColor = true;
-            this.btnEditEmployee.Click += new System.EventHandler(this.btnEditEmployee_Click);
-            // 
-            // tbEditEmployeeFirstName
-            // 
-            this.tbEditEmployeeFirstName.Location = new System.Drawing.Point(75, 30);
-            this.tbEditEmployeeFirstName.Name = "tbEditEmployeeFirstName";
-            this.tbEditEmployeeFirstName.Size = new System.Drawing.Size(115, 20);
-            this.tbEditEmployeeFirstName.TabIndex = 3;
-            // 
-            // tbEditEmployeeLastName
-            // 
-            this.tbEditEmployeeLastName.Location = new System.Drawing.Point(75, 56);
-            this.tbEditEmployeeLastName.Name = "tbEditEmployeeLastName";
-            this.tbEditEmployeeLastName.Size = new System.Drawing.Size(115, 20);
-            this.tbEditEmployeeLastName.TabIndex = 4;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 59);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Nachname";
             // 
             // label3
             // 
@@ -169,14 +154,29 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Vorname";
             // 
-            // label4
+            // tbEditEmployeeLastName
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 59);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Nachname";
+            this.tbEditEmployeeLastName.Location = new System.Drawing.Point(75, 56);
+            this.tbEditEmployeeLastName.Name = "tbEditEmployeeLastName";
+            this.tbEditEmployeeLastName.Size = new System.Drawing.Size(115, 20);
+            this.tbEditEmployeeLastName.TabIndex = 4;
+            // 
+            // tbEditEmployeeFirstName
+            // 
+            this.tbEditEmployeeFirstName.Location = new System.Drawing.Point(75, 30);
+            this.tbEditEmployeeFirstName.Name = "tbEditEmployeeFirstName";
+            this.tbEditEmployeeFirstName.Size = new System.Drawing.Size(115, 20);
+            this.tbEditEmployeeFirstName.TabIndex = 3;
+            // 
+            // btnEditEmployee
+            // 
+            this.btnEditEmployee.Location = new System.Drawing.Point(9, 131);
+            this.btnEditEmployee.Name = "btnEditEmployee";
+            this.btnEditEmployee.Size = new System.Drawing.Size(181, 23);
+            this.btnEditEmployee.TabIndex = 2;
+            this.btnEditEmployee.Text = "Änderungen speichern";
+            this.btnEditEmployee.UseVisualStyleBackColor = true;
+            this.btnEditEmployee.Click += new System.EventHandler(this.btnEditEmployee_Click);
             // 
             // btnDeleteEmployee
             // 
@@ -199,6 +199,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Aufgaben";
             // 
+            // btnAssignTask
+            // 
+            this.btnAssignTask.Location = new System.Drawing.Point(6, 129);
+            this.btnAssignTask.Name = "btnAssignTask";
+            this.btnAssignTask.Size = new System.Drawing.Size(188, 23);
+            this.btnAssignTask.TabIndex = 1;
+            this.btnAssignTask.Text = "Aufgabe zuweisen";
+            this.btnAssignTask.UseVisualStyleBackColor = true;
+            this.btnAssignTask.Click += new System.EventHandler(this.btnAssignTask_Click);
+            // 
             // cbTasks
             // 
             this.cbTasks.FormattingEnabled = true;
@@ -207,22 +217,13 @@
             this.cbTasks.Size = new System.Drawing.Size(188, 21);
             this.cbTasks.TabIndex = 0;
             // 
-            // btnAssignTask
+            // grdAssignedTasks
             // 
-            this.btnAssignTask.Location = new System.Drawing.Point(6, 129);
-            this.btnAssignTask.Name = "btnAssignTask";
-            this.btnAssignTask.Size = new System.Drawing.Size(188, 23);
-            this.btnAssignTask.TabIndex = 1;
-            this.btnAssignTask.Text = "Aufgabe Hinzufügen";
-            this.btnAssignTask.UseVisualStyleBackColor = true;
-            // 
-            // grdTasks
-            // 
-            this.grdTasks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdTasks.Location = new System.Drawing.Point(6, 19);
-            this.grdTasks.Name = "grdTasks";
-            this.grdTasks.Size = new System.Drawing.Size(320, 165);
-            this.grdTasks.TabIndex = 4;
+            this.grdAssignedTasks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdAssignedTasks.Location = new System.Drawing.Point(6, 19);
+            this.grdAssignedTasks.Name = "grdAssignedTasks";
+            this.grdAssignedTasks.Size = new System.Drawing.Size(320, 165);
+            this.grdAssignedTasks.TabIndex = 4;
             // 
             // btnDeleteAssignedTask
             // 
@@ -232,6 +233,7 @@
             this.btnDeleteAssignedTask.TabIndex = 7;
             this.btnDeleteAssignedTask.Text = "Aufgabe Löschen";
             this.btnDeleteAssignedTask.UseVisualStyleBackColor = true;
+            this.btnDeleteAssignedTask.Click += new System.EventHandler(this.btnDeleteAssignedTask_Click);
             // 
             // grpbEmployees
             // 
@@ -244,23 +246,23 @@
             this.grpbEmployees.TabStop = false;
             this.grpbEmployees.Text = "Mitarbeiter";
             // 
-            // grpbTasks
+            // grpbAssignedTasks
             // 
-            this.grpbTasks.Controls.Add(this.grdTasks);
-            this.grpbTasks.Controls.Add(this.btnDeleteAssignedTask);
-            this.grpbTasks.Location = new System.Drawing.Point(350, 12);
-            this.grpbTasks.Name = "grpbTasks";
-            this.grpbTasks.Size = new System.Drawing.Size(333, 219);
-            this.grpbTasks.TabIndex = 9;
-            this.grpbTasks.TabStop = false;
-            this.grpbTasks.Text = "Aufgaben";
+            this.grpbAssignedTasks.Controls.Add(this.grdAssignedTasks);
+            this.grpbAssignedTasks.Controls.Add(this.btnDeleteAssignedTask);
+            this.grpbAssignedTasks.Location = new System.Drawing.Point(350, 12);
+            this.grpbAssignedTasks.Name = "grpbAssignedTasks";
+            this.grpbAssignedTasks.Size = new System.Drawing.Size(333, 219);
+            this.grpbAssignedTasks.TabIndex = 9;
+            this.grpbAssignedTasks.TabStop = false;
+            this.grpbAssignedTasks.Text = "Aufgaben";
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 437);
-            this.Controls.Add(this.grpbTasks);
+            this.Controls.Add(this.grpbAssignedTasks);
             this.Controls.Add(this.grpbEmployees);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpbEditEmployee);
@@ -275,9 +277,9 @@
             this.grpbEditEmployee.ResumeLayout(false);
             this.grpbEditEmployee.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.grdTasks)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdAssignedTasks)).EndInit();
             this.grpbEmployees.ResumeLayout(false);
-            this.grpbTasks.ResumeLayout(false);
+            this.grpbAssignedTasks.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -300,10 +302,10 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnAssignTask;
         private System.Windows.Forms.ComboBox cbTasks;
-        private System.Windows.Forms.DataGridView grdTasks;
+        private System.Windows.Forms.DataGridView grdAssignedTasks;
         private System.Windows.Forms.Button btnDeleteAssignedTask;
         private System.Windows.Forms.GroupBox grpbEmployees;
-        private System.Windows.Forms.GroupBox grpbTasks;
+        private System.Windows.Forms.GroupBox grpbAssignedTasks;
     }
 }
 

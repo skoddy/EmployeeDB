@@ -34,9 +34,18 @@ namespace EmployeeManagement
             db.Insert("employees", parameters);
         }
 
+        public void AssignTask(int taskId, int employeeId)
+        {
+            MySqlParameter[] parameters = {
+                new MySqlParameter("@taskId", taskId),
+                new MySqlParameter("@employeeId", employeeId)};
+
+            db.Insert("employee_task", parameters);
+        }
+
         public List<Employee> GetList()
         {
-            string query = "SELECT id, firstName, lastName FROM employees WHERE deleted=0 ORDER BY lastName";
+            string query = "SELECT id, firstName, lastName FROM employees WHERE deleted=0 ORDER BY id";
 
             List<Employee> list = db.GetList<Employee>(query);
 

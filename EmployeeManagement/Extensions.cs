@@ -49,6 +49,7 @@ namespace EmployeeManagement
                     DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), row[property.Name].ToString());
                     property.SetValue(item, day, null);
                 }
+
                 else
                 {
                     if (row[property.Name] == DBNull.Value)

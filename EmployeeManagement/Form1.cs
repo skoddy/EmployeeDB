@@ -8,9 +8,10 @@ namespace EmployeeManagement
     public partial class FrmMain : Form
     {
         private Employee employee;
-        private Tasks task;
+        private Task task;
         private List<Employee> employees;
-        private List<Tasks> tasks;
+        private List<Task> tasks;
+        private List<Task> assignedTasks;
 
         public FrmMain()
         {
@@ -22,9 +23,14 @@ namespace EmployeeManagement
             SetupEmployeeGrid();
             PopulateEmployeeGrid();
 
-            SetupTasksGrid();
-            PopulateTasksGrid();
-
+            SetupAssignedTasksGrid();
+            // Da das Grid Standartmässig einen Focus hat,
+            // werden hier die dazugehörigen Aufgaben geladen.
+            if (grdEmployee.SelectedRows[0].Cells[0].Value != null)
+            {
+                int employeeId = (int)grdEmployee.SelectedRows[0].Tag;
+                PopulateAssignedTasksGrid(employeeId);
+            }
             PopulateTasksComboBox();
         }
 
@@ -55,46 +61,50 @@ namespace EmployeeManagement
             {
                 MessageBox.Show(ex.Message);
             }
+
           
         }
 
-        private void PopulateTasksGrid()
+        private void PopulateAssignedTasksGrid(int id)
         {
-            task = new Tasks();
+            task = new Task();
 
             try
             {
                 // Aufgaben in die Liste laden
-                tasks = task.GetList();
+                assignedTasks = task.GetAssignedTasksList(id);
 
+                grdAssignedTasks.Rows.Clear();
                 // Festlegen der Zeilenanzahl des Grids.
-                grdTasks.RowCount = tasks.Count;
+                grdAssignedTasks.RowCount = assignedTasks.Count;
 
                 // Mitarbeiten auslesen zuweisen
-                foreach (Tasks task in tasks)
+                foreach (Task task in assignedTasks)
                 {
-                    int index = tasks.IndexOf(task);
+                    int index = assignedTasks.IndexOf(task);
                     // Id wird im Tag der Zeile gespeichert.
-                    grdTasks.Rows[index].Tag = employee.Id;
-                    grdTasks.Rows[index].Cells["Aufgabe"].Value = task.Task;
-                    grdTasks.Rows[index].Cells["Dauer"].Value = task.Time;
+                    grdAssignedTasks.Rows[index].Tag = task.Id;
+                    grdAssignedTasks.Rows[index].Cells["Aufgabe"].Value = task.Name;
+                    grdAssignedTasks.Rows[index].Cells["Dauer"].Value = task.Time;
                 }
-
-
-
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void PopulateTasksComboBox()
         {
-            foreach(Tasks task in tasks)
+            task = new Task();
+            tasks = task.GetAllTasks();
+
+            if (tasks.Count != 0)
             {
-                cbTasks.Items.Add(task.Task);
+                foreach(Task task in tasks)
+                {
+                    cbTasks.Items.Add(task.Name);
+                }
             }
         }
 
@@ -131,13 +141,13 @@ namespace EmployeeManagement
             grdEmployee.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grdEmployee.MultiSelect = false;
             grdEmployee.SelectionChanged += new EventHandler(GridEmployeeRow_Click);
-            
+
         }
 
-        private void SetupTasksGrid()
+        private void SetupAssignedTasksGrid()
         {
             // Grid anzeigen
-            grpbTasks.Controls.Add(grdTasks);
+            grpbAssignedTasks.Controls.Add(grdAssignedTasks);
 
             DataGridViewTextBoxColumn task = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn time = new DataGridViewTextBoxColumn();
@@ -154,24 +164,18 @@ namespace EmployeeManagement
             time.Name = "Dauer";
 
             // Gridaufbau
-            grdTasks.Columns.AddRange(task, time);
-            grdTasks.RowCount = 1;
-            grdTasks.Width = 300 + 20;
-            grdTasks.RowHeadersVisible = false;
-            grdTasks.AllowUserToAddRows = false;
-            grdTasks.ReadOnly = true;
-            grdTasks.Visible = true;
-            grdTasks.AllowUserToAddRows = false;
-            grdTasks.AllowUserToResizeColumns = false;
-            grdTasks.AllowUserToResizeRows = false;
-            grdTasks.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            grdTasks.MultiSelect = false;
-            grdTasks.SelectionChanged += new EventHandler(GridTasksRow_Click);
-
-        }
-
-        private void GridTasksRow_Click(object sender, EventArgs e)
-        {
+            grdAssignedTasks.Columns.AddRange(task, time);
+            grdAssignedTasks.RowCount = 1;
+            grdAssignedTasks.Width = 300 + 20;
+            grdAssignedTasks.RowHeadersVisible = false;
+            grdAssignedTasks.AllowUserToAddRows = false;
+            grdAssignedTasks.ReadOnly = true;
+            grdAssignedTasks.Visible = true;
+            grdAssignedTasks.AllowUserToAddRows = false;
+            grdAssignedTasks.AllowUserToResizeColumns = false;
+            grdAssignedTasks.AllowUserToResizeRows = false;
+            grdAssignedTasks.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            grdAssignedTasks.MultiSelect = false;
 
         }
 
@@ -183,6 +187,8 @@ namespace EmployeeManagement
                 Employee employee = employees.Find(data => data.Id == id);
                 tbEditEmployeeFirstName.Text = employee.FirstName;
                 tbEditEmployeeLastName.Text = employee.LastName;
+
+                PopulateAssignedTasksGrid(id);
             }
         }
 
@@ -236,6 +242,42 @@ namespace EmployeeManagement
             }
             PopulateEmployeeGrid();
 
+        }
+
+        private void btnAssignTask_Click(object sender, EventArgs e)
+        {
+            if(cbTasks.SelectedIndex != -1 && grdEmployee.SelectedRows[0].Cells[0].Value != null)
+            {
+                int taskId = cbTasks.SelectedIndex + 1;
+                int employeeId = (int)grdEmployee.SelectedRows[0].Tag;
+                try
+                {
+                    employee.AssignTask(taskId, employeeId);
+                    PopulateAssignedTasksGrid(employeeId);
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void btnDeleteAssignedTask_Click(object sender, EventArgs e)
+        {
+            if(grdAssignedTasks.SelectedRows[0].Cells[0].Value != null)
+            {
+                int assignedTaskId = (int)grdAssignedTasks.SelectedRows[0].Tag;
+                int employeeId = (int)grdEmployee.SelectedRows[0].Tag;
+                try
+                {
+                    task.DeleteAssignedTask(assignedTaskId);
+                    PopulateAssignedTasksGrid(employeeId);
+                }
+                catch(MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
     }
 }

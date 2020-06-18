@@ -30,4 +30,5 @@ namespace EmployeeManagement
         public string Task { get => task; set => task = value; }
         public int Time { get => time; set => time = value; }
     }
+
 }
